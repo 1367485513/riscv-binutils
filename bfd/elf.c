@@ -9008,7 +9008,8 @@ _bfd_elf_set_section_contents (bfd *abfd,
   Elf_Internal_Shdr *hdr;
   file_ptr pos;
 //xiugai
-
+  const void *pointer;
+  pointer = location;
 
   if (! abfd->output_has_begun
       && ! _bfd_elf_compute_section_file_positions (abfd, NULL))
@@ -9049,16 +9050,19 @@ printf("------------------------------------------------------------------------
       {
       //short int a = *(short int *)(location++);
       //int a = *(int *)(location++);
-      unsigned char a = *(unsigned char *)(location++);
+      unsigned char a = *(unsigned char *)(pointer++);
       //decimal = toascii(a);
       if (i == 1)
          {    
      	      //int example = 0xef;
               int *ptr = binary_conversion(a);
+	      int buffer[8] = {0,0,0,0,0,0,0,0};
               for(int j=0;j<8;j++)
               {
+		  buffer[j] = *ptr;
                   printf("%d",*ptr++);
               }
+	      printf("__%d__%d__",buffer[6],buffer[7]);
               printf("\n");
          }
      /*      if(i == 1)
@@ -9074,8 +9078,39 @@ printf("------------------------------------------------------------------------
 	if (i%8 == 0)
 	   printf("\n");
 	d++;
+/*	for(bfd_size_type q=0;q < count;q++)
+	{
+		location--;
+	}*/  //in order to back poniter loaction
       }
         printf("\n");
+printf("-----------------------------------------------------------------------------\n");
+printf("----------------------------------pick command-------------------------------\n");
+	for(bfd_size_type m=1;m<=count;m++)
+	{
+        	unsigned char a = *(unsigned char *)(location++);
+		int *ptr = binary_conversion(a);
+		int buffer[8] = {0,0,0,0,0,0,0,0};
+		for(int n=0;n<8;n++)
+		{
+			buffer[n]=*ptr++;
+		}
+		if (buffer[6] == 1 && buffer[7] == 1)
+		{
+			m = m+3;
+        	 a = *(unsigned char *)(location++);
+        	 a = *(unsigned char *)(location++);
+        	 a = *(unsigned char *)(location++);
+			printf("fei yasuo\n");
+		}
+		else
+		{
+			m = m+1;
+        	 a = *(unsigned char *)(location++);
+			printf(" yasuo\n");
+		}
+
+	}
 printf("-----------------------------------------------------------------------------\n");
   }
 
