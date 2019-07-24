@@ -48,6 +48,23 @@ SECTION
 #ifdef CORE_HEADER
 #include CORE_HEADER
 #endif
+//xiugai
+//#define toascii(c) (((unsigned char)(c))&0x7f)
+int binary[8]={0,0,0,0,0,0,0,0};
+void binary_conversion(int i)
+{
+	static int n=8;
+//	int binary[8]={0,0,0,0,0,0,0,0};
+        int k,j;
+        k=i/2;
+        j=i%2;
+        binary[--n]=j;
+        if (k != 0) 
+        {
+               binary_conversion(k);
+        }
+//        return &binary;
+}
 
 static int elf_sort_sections (const void *, const void *);
 static bfd_boolean assign_file_positions_except_relocs (bfd *, struct bfd_link_info *);
@@ -8970,6 +8987,8 @@ _bfd_elf_set_section_contents (bfd *abfd,
 {
   Elf_Internal_Shdr *hdr;
   file_ptr pos;
+//xiugai
+
 
   if (! abfd->output_has_begun
       && ! _bfd_elf_compute_section_file_positions (abfd, NULL))
@@ -8994,6 +9013,51 @@ _bfd_elf_set_section_contents (bfd *abfd,
   if (bfd_seek (abfd, pos, SEEK_SET) != 0
       || bfd_bwrite (location, count, abfd) != count)
     return FALSE;
+
+  //xiugai
+  if(strcmp(section->name,".text") == 0)
+   {
+      static int d=0;//static in order to prevent print many times
+      if(d == 0)
+      {
+printf("-----------------------------------------------------------------------------\n");
+printf("-----------------------------output text section-----------------------------\n");
+printf("-----------------------------------------------------------------------------\n");
+      }
+      bfd_size_type i;
+      for (i=1 ; i <= count ; i++)
+      {
+      //short int a = *(short int *)(location++);
+      //int a = *(int *)(location++);
+      unsigned char a = *(unsigned char *)(location++);
+      //decimal = toascii(a);
+      if (i == 1)
+         {    
+     	      int example = 0xef;
+              binary_conversion(example);
+              for(int j=0;j<8;j++)
+              {
+                  printf("%d",binary[j]);
+              }
+              printf("\n");
+         }
+     /*      if(i == 1)
+             {
+
+             for(int j=0;j<8;j++)
+             {
+             printf("%d",*ptr++);
+             }
+             printf("\n");
+             }*/
+	printf("0x%.2hx ",a);
+	if (i%8 == 0)
+	   printf("\n");
+	d++;
+      }
+        printf("\n");
+printf("-----------------------------------------------------------------------------\n");
+  }
 
   return TRUE;
 }
