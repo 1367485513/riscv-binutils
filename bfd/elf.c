@@ -51,7 +51,7 @@ SECTION
 //xiugai
 //#define toascii(c) (((unsigned char)(c))&0x7f)
 //int binary[8]={0,0,0,0,0,0,0,0};
-int * binary_conversion(int i)
+/*int * binary_conversion(int i)
 {
 	static int n=8;
 	static int binary[8]={0,0,0,0,0,0,0,0};
@@ -64,6 +64,26 @@ int * binary_conversion(int i)
                binary_conversion(k);
         }
         return binary;
+}*/
+int * binary_conversion(int i)
+{
+	static int binary[8] = {0,0,0,0,0,0,0,0};
+	int k,j;
+	for(int m=0;m<8;m++)
+	{
+		k=i/2;
+		j=i%2;
+		binary[7-m]=j;
+		i=k;
+		if (k!= 0)
+			continue;
+		else
+			for(int n=0;n<7-m;n++)
+			{
+				binary[n]=0;
+			}
+	}
+	return binary;
 }
 
 static int elf_sort_sections (const void *, const void *);
