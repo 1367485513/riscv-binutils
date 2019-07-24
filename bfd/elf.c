@@ -50,11 +50,11 @@ SECTION
 #endif
 //xiugai
 //#define toascii(c) (((unsigned char)(c))&0x7f)
-int binary[8]={0,0,0,0,0,0,0,0};
-void binary_conversion(int i)
+//int binary[8]={0,0,0,0,0,0,0,0};
+int * binary_conversion(int i)
 {
 	static int n=8;
-//	int binary[8]={0,0,0,0,0,0,0,0};
+	static int binary[8]={0,0,0,0,0,0,0,0};
         int k,j;
         k=i/2;
         j=i%2;
@@ -63,7 +63,7 @@ void binary_conversion(int i)
         {
                binary_conversion(k);
         }
-//        return &binary;
+        return binary;
 }
 
 static int elf_sort_sections (const void *, const void *);
@@ -9033,11 +9033,11 @@ printf("------------------------------------------------------------------------
       //decimal = toascii(a);
       if (i == 1)
          {    
-     	      int example = 0xef;
-              binary_conversion(example);
+     	      //int example = 0xef;
+              int *ptr = binary_conversion(a);
               for(int j=0;j<8;j++)
               {
-                  printf("%d",binary[j]);
+                  printf("%d",*ptr++);
               }
               printf("\n");
          }
