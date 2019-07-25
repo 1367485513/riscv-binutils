@@ -9086,9 +9086,9 @@ printf("------------------------------------------------------------------------
         printf("\n");
 printf("-----------------------------------------------------------------------------\n");
 printf("----------------------------------pick command-------------------------------\n");
-	for(bfd_size_type m=1;m<=count;m++)
+	for(bfd_size_type m=1;m<=count;m++) //m wei num move,a wei pointer move;
 	{
-        	unsigned char a = *(unsigned char *)(location++);
+        	unsigned char a = *(unsigned char *)(location++);//poniter and location are piniter to mem-addr 
 		int *ptr = binary_conversion(a);
 		int buffer[8] = {0,0,0,0,0,0,0,0};
 		for(int n=0;n<8;n++)
@@ -9098,16 +9098,34 @@ printf("----------------------------------pick command--------------------------
 		if (buffer[6] == 1 && buffer[7] == 1)
 		{
 			m = m+3;
-        	 a = *(unsigned char *)(location++);
-        	 a = *(unsigned char *)(location++);
-        	 a = *(unsigned char *)(location++);
-			printf("fei yasuo\n");
+			//judge jump instruction
+			if ((buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1) ||
+			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
+			{
+				printf("fei yasuo jump instruction: ");
+				printf("0x%.2hx ",a);
+ 		        	a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+        			a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+		        	a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+				printf("\n");
+			}
+			else
+			{
+				printf("fei yasuo other instruction: ");
+ 		        	a = *(unsigned char *)(location++);
+ 		        	a = *(unsigned char *)(location++);
+ 		        	a = *(unsigned char *)(location++);
+				printf("\n");
+			}
 		}
 		else
 		{
+			printf(" yasuo\n");
 			m = m+1;
         	 a = *(unsigned char *)(location++);
-			printf(" yasuo\n");
 		}
 
 	}
