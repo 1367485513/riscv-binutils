@@ -420,10 +420,10 @@ make[3]: Entering directory '/home/majiahao/ddddd/riscv-binutils/build/libiberty
 make[3]: Nothing to be done for 'all'.
 make[3]: Leaving directory '/home/majiahao/ddddd/riscv-binutils/build/libiberty/testsuite'
 if test -n ""; then \
-	/bin/bash ../../libiberty/../mkinstalldirs /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O2 -print-multi-os-directory`; \
-	/usr/bin/install -c -m 644 ./libiberty.a /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O2 -print-multi-os-directory`/./libiberty.an; \
-	( cd /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O2 -print-multi-os-directory` ; chmod 644 ./libiberty.an ;ranlib ./libiberty.an ); \
-	mv -f /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O2 -print-multi-os-directory`/./libiberty.an /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O2 -print-multi-os-directory`/./libiberty.a; \
+	/bin/bash ../../libiberty/../mkinstalldirs /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O0 -print-multi-os-directory`; \
+	/usr/bin/install -c -m 644 ./libiberty.a /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O0 -print-multi-os-directory`/./libiberty.an; \
+	( cd /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O0 -print-multi-os-directory` ; chmod 644 ./libiberty.an ;ranlib ./libiberty.an ); \
+	mv -f /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O0 -print-multi-os-directory`/./libiberty.an /home/majiahao/ddddd/riscv-binutils-install/lib/`gcc -g -O0 -print-multi-os-directory`/./libiberty.a; \
 	case "" in \
 	  /*)    thd=;; \
 	  *)     thd=/home/majiahao/ddddd/riscv-binutils-install/include/;; \

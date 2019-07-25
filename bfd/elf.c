@@ -9115,17 +9115,82 @@ printf("----------------------------------pick command--------------------------
 			else
 			{
 				printf("fei yasuo other instruction: ");
+ 		        	/*a = *(unsigned char *)(location++);
  		        	a = *(unsigned char *)(location++);
- 		        	a = *(unsigned char *)(location++);
- 		        	a = *(unsigned char *)(location++);
+ 		        	a = *(unsigned char *)(location++);*/
+				location++;
+				location++;
+				location++;
 				printf("\n");
+			}
+		}
+		else if (buffer[6]==0 && buffer[7]==1) 
+		{
+			a = *(unsigned char *)(location++);
+			int *ptr2 = binary_conversion(a);
+			int buffer2[8] = {0,0,0,0,0,0,0,0};
+			for(int n=0;n<8;n++)
+				buffer2[n]=*ptr2++;
+			if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==1 ) ||
+               		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
+			{
+				printf("------------ yasuo, c.j c.jal\n");
+			}
+			else
+			{
+				printf(" yasuo, not jump :");
+				printf("0x%.2hx ",a);
+        	 		//a = *(unsigned char *)(location++);
+				//printf("0x%.2hx ",a);
+				printf("\n");
+			}
+			m = m+1;
+		}
+		else if(buffer[6]==1 && buffer[7]==0)
+		{
+			if(buffer[5]==0 && buffer[4]==0 && buffer[3]==0 && buffer[2]==0 && buffer[1]==0)
+			{
+				a = *(unsigned char *)(location++);
+				m = m+1;
+				int *ptr2 = binary_conversion(a);
+				int buffer2[8] = {0,0,0,0,0,0,0,0};
+				for(int n=0;n<8;n++)
+					buffer2[n]=*ptr2++;
+				if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==1) ||
+				   (buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==0))
+				{
+					printf(" yasuo, c.jr c.jalr\n");
+				}
+				else
+				{
+					printf(" yasuo,not jump instr: ");
+					printf("0x%.2hx ",a);
+					m = m+1;a = *(unsigned char *)(location++);
+					printf("0x%.2hx ",a);
+					printf("\n");
+				}
+
+			}
+			else
+			{
+				printf(" yasuo,not jump instr: ");
+				printf("0x%.2hx ",a);
+				m = m+1;
+        	 		a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+				printf("\n");
+		
 			}
 		}
 		else
 		{
-			printf(" yasuo\n");
-			m = m+1;
-        	 a = *(unsigned char *)(location++);
+				printf(" yasuo,not jump instr: ");
+				printf("0x%.2hx ",a);
+				m = m+1;
+        	 		a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+				printf("\n");
+				//location++;
 		}
 
 	}
