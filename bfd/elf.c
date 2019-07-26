@@ -9127,6 +9127,7 @@ printf("----------------------------------pick command--------------------------
 		else if (buffer[6]==0 && buffer[7]==1) 
 		{
 			a = *(unsigned char *)(location++);
+			printf("********yanzheng 0x%.2hx\n",a);
 			int *ptr2 = binary_conversion(a);
 			int buffer2[8] = {0,0,0,0,0,0,0,0};
 			for(int n=0;n<8;n++)
@@ -9134,14 +9135,24 @@ printf("----------------------------------pick command--------------------------
 			if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==1 ) ||
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
-				printf("------------ yasuo, c.j c.jal\n");
+				printf("01--- yasuo, c.j c.jal :");
+				a = *(unsigned char *)(location--);
+				a = *(unsigned char *)(location--);
+				a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+				a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
+				printf("\n");
 			}
 			else
 			{
-				printf(" yasuo, not jump :");
+				printf("01--- yasuo, not jump :");
+				a = *(unsigned char *)(location--);
+				a = *(unsigned char *)(location--);
+				a = *(unsigned char *)(location++);
 				printf("0x%.2hx ",a);
-        	 		//a = *(unsigned char *)(location++);
-				//printf("0x%.2hx ",a);
+				a = *(unsigned char *)(location++);
+				printf("0x%.2hx ",a);
 				printf("\n");
 			}
 			m = m+1;
@@ -9159,13 +9170,21 @@ printf("----------------------------------pick command--------------------------
 				if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==1) ||
 				   (buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==0))
 				{
-					printf(" yasuo, c.jr c.jalr\n");
+					printf("10--- yasuo, c.jr c.jalr :");
+					a = *(unsigned char *)(location--);
+					a = *(unsigned char *)(location--);
+					a = *(unsigned char *)(location++);
+					printf("0x%.2hx ",a);
+					a = *(unsigned char *)(location++);
+					printf("0x%.2hx ",a);
+					printf("\n");
 				}
 				else
 				{
-					printf(" yasuo,not jump instr: ");
-					m = m+1;
+					printf("10--- yasuo,not jump instr: ");
 					a = *(unsigned char *)(location--);
+					a = *(unsigned char *)(location--);
+					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
 					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
@@ -9175,12 +9194,12 @@ printf("----------------------------------pick command--------------------------
 			}
 			else
 			{
-				printf(" yasuo,not jump instr: ");
+				printf(" 10--- yasuo,not jump instr: ");
 				printf("0x%.2hx ",a);
 				m = m+1;
         	 		a = *(unsigned char *)(location++);
 				printf("0x%.2hx ",a);
-				printf("\n");
+				printf(" . zhi pan hou 8 wei\n");
 		
 			}
 		}
