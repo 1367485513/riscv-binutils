@@ -9164,8 +9164,10 @@ printf("----------------------------------pick command--------------------------
 				else
 				{
 					printf(" yasuo,not jump instr: ");
+					m = m+1;
+					a = *(unsigned char *)(location--);
 					printf("0x%.2hx ",a);
-					m = m+1;a = *(unsigned char *)(location++);
+					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
 					printf("\n");
 				}
