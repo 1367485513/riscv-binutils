@@ -9097,18 +9097,22 @@ printf("----------------------------------pick command--------------------------
 		}
 		if (buffer[6] == 1 && buffer[7] == 1)
 		{
-			m = m+3;
+			//m = m+3;
 			//judge jump instruction
 			if ((buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1) ||
 			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
 			{
+				printf("offest addr of under instruction for tjis part= %d\n",m);
 				printf("not compress, jump instruction:");
 				printf("0x%.2hx ",a);
  		        	a = *(unsigned char *)(location++);
+				m++;
 				printf("0x%.2hx ",a);
         			a = *(unsigned char *)(location++);
+				m++;
 				printf("0x%.2hx ",a);
 		        	a = *(unsigned char *)(location++);
+				m++;
 				printf("0x%.2hx ",a);
 				printf("\n");
 			}
@@ -9119,8 +9123,11 @@ printf("----------------------------------pick command--------------------------
  		        	a = *(unsigned char *)(location++);
  		        	a = *(unsigned char *)(location++);*/
 				location++;
+				m++;
 				location++;
+				m++;
 				location++;
+				m++;
 				printf("\n");
 			}
 		}
@@ -9135,6 +9142,7 @@ printf("----------------------------------pick command--------------------------
 			if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==1 ) ||
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
+				printf("offest addr of under instruction for tjis part= %d\n",m);
 				printf("compress, 'c.j c.jal'  instr:");
 				a = *(unsigned char *)(location--);
 				a = *(unsigned char *)(location--);
@@ -9163,7 +9171,7 @@ printf("----------------------------------pick command--------------------------
 			if(buffer[5]==0 && buffer[4]==0 && buffer[3]==0 && buffer[2]==0 && buffer[1]==0)
 			{
 				a = *(unsigned char *)(location++);
-				m = m+1;
+				//m = m+1;
 				int *ptr2 = binary_conversion(a);
 				int buffer2[8] = {0,0,0,0,0,0,0,0};
 				for(int n=0;n<8;n++)
@@ -9172,6 +9180,7 @@ printf("----------------------------------pick command--------------------------
 				   (buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==0))
 				{
 					//printf("10--- yasuo, c.jr c.jalr :");
+					printf("offest addr of under instruction for tjis part= %d\n",m);
 					printf("compress,'c.jr c.jalr' instr:");
 					a = *(unsigned char *)(location--);
 					a = *(unsigned char *)(location--);
@@ -9180,6 +9189,7 @@ printf("----------------------------------pick command--------------------------
 					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
 					printf("\n");
+					m = m+1;
 				}
 				else
 				{
@@ -9192,6 +9202,7 @@ printf("----------------------------------pick command--------------------------
 					a = *(unsigned char *)(location++);
 					//printf("0x%.2hx ",a);
 					//printf("\n");
+					m = m+1;
 				}
 
 			}
