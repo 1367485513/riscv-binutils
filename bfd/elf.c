@@ -9010,6 +9010,7 @@ _bfd_elf_set_section_contents (bfd *abfd,
 //xiugai
   const void *pointer;
   pointer = location;
+  static int text_addr = 0;
 
   if (! abfd->output_has_begun
       && ! _bfd_elf_compute_section_file_positions (abfd, NULL))
@@ -9102,7 +9103,9 @@ printf("----------------------------------pick command--------------------------
 			if ((buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1) ||
 			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
 			{
-				printf("offest addr of under instruction for tjis part= %d\n",m);
+				printf("offest addr of under instruction for this part= %d\n",m);
+				int addr = m+text_addr; 
+				printf("offest addr of under instruction for this part= %d\n",addr);
 				printf("not compress, jump instruction:");
 				printf("0x%.2hx ",a);
  		        	a = *(unsigned char *)(location++);
@@ -9142,7 +9145,9 @@ printf("----------------------------------pick command--------------------------
 			if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==1 ) ||
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
-				printf("offest addr of under instruction for tjis part= %d\n",m);
+				printf("offest addr of under instruction for this part= %d\n",m);
+				int addr = m+text_addr; 
+				printf("offest addr of under instruction for this part= %d\n",addr);
 				printf("compress, 'c.j c.jal'  instr:");
 				a = *(unsigned char *)(location--);
 				a = *(unsigned char *)(location--);
@@ -9180,7 +9185,9 @@ printf("----------------------------------pick command--------------------------
 				   (buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==0))
 				{
 					//printf("10--- yasuo, c.jr c.jalr :");
-					printf("offest addr of under instruction for tjis part= %d\n",m);
+					printf("offest addr of under instruction for this part= %d\n",m);
+					int addr = m+text_addr; 
+					printf("offest addr of under instruction for this part= %d\n",addr);
 					printf("compress,'c.jr c.jalr' instr:");
 					a = *(unsigned char *)(location--);
 					a = *(unsigned char *)(location--);
@@ -9231,6 +9238,7 @@ printf("----------------------------------pick command--------------------------
 		}
 
 	}
+	text_addr = text_addr+count;
 printf("-----------------------------------------------------------------------------\n");
   }
 
