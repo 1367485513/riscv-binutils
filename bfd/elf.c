@@ -9087,6 +9087,7 @@ printf("------------------------------------------------------------------------
         printf("\n");
 printf("-----------------------------------------------------------------------------\n");
 printf("----------------------------------pick command-------------------------------\n");
+printf("----------------------------------offset starts at 0-------------------------\n");
 	for(bfd_size_type m=1;m<=count;m++) //m wei num move,a wei pointer move;
 	{
         	unsigned char a = *(unsigned char *)(location++);//poniter and location are piniter to mem-addr 
@@ -9103,8 +9104,8 @@ printf("----------------------------------pick command--------------------------
 			if ((buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1) ||
 			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
 			{
-				printf("offest addr of under instruction for this part= %d\n",m);
-				int addr = m+text_addr; 
+				//printf("offest addr of under instruction for this part= %d\n",m);
+				int addr = m+text_addr-1; 
 				printf("offest addr of under instruction for this part= %d\n",addr);
 				printf("not compress, jump instruction:");
 				printf("0x%.2hx ",a);
@@ -9145,8 +9146,8 @@ printf("----------------------------------pick command--------------------------
 			if((buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==1 ) ||
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
-				printf("offest addr of under instruction for this part= %d\n",m);
-				int addr = m+text_addr; 
+				//printf("offest addr of under instruction for this part= %d\n",m);
+				int addr = m+text_addr-1; 
 				printf("offest addr of under instruction for this part= %d\n",addr);
 				printf("compress, 'c.j c.jal'  instr:");
 				a = *(unsigned char *)(location--);
@@ -9185,8 +9186,8 @@ printf("----------------------------------pick command--------------------------
 				   (buffer2[0]==1 && buffer2[1]==0 && buffer2[2]==0 && buffer2[3]==0))
 				{
 					//printf("10--- yasuo, c.jr c.jalr :");
-					printf("offest addr of under instruction for this part= %d\n",m);
-					int addr = m+text_addr; 
+					//printf("offest addr of under instruction for this part= %d\n",m);
+					int addr = m+text_addr-1; 
 					printf("offest addr of under instruction for this part= %d\n",addr);
 					printf("compress,'c.jr c.jalr' instr:");
 					a = *(unsigned char *)(location--);
