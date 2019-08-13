@@ -814,9 +814,12 @@ elf_object_p (bfd *abfd)
 	 can start processing them.  Note that the first section header is
 	 a dummy placeholder entry, so we ignore it.  */
       num_sec = elf_numsections (abfd);
+      asection *newsect;
+      const char *name=".mysection";
       for (shindex = 1; shindex < num_sec; shindex++)
 	if (!bfd_section_from_shdr (abfd, shindex))
 	  goto got_no_match;
+      newsect = bfd_make_section_anyway (abfd, name); 
 
       /* Set up ELF sections for SHF_GROUP and SHF_LINK_ORDER.  */
       if (! _bfd_elf_setup_sections (abfd))

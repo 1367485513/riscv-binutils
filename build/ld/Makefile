@@ -425,11 +425,11 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 # which may have the form: LIB_PATH=/lib:/usr/local/lib.  This can be set
 # when the linker is configured via the --with-lib-path configure switch.
 LIB_PATH = 
-LIPO = 
+LIPO = lipo
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = makeinfo --split-size=5000000
+MAKEINFO = makeinfo --split-size=5000000 --split-size=5000000
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = $(top_builddir)/../../ld/../mkinstalldirs
 MSGFMT = /usr/bin/msgfmt

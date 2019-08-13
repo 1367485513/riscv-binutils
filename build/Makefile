@@ -91,7 +91,7 @@ MAINTAINER_MODE_TRUE = #
 # -------------------------------------------------
 
 # The gcc driver likes to know the arguments it was configured with.
-TOPLEVEL_CONFIGURE_ARGUMENTS=../configure --prefix=/home/majiahao/ddddd/riscv-binutils-install --target=riscv64
+TOPLEVEL_CONFIGURE_ARGUMENTS=../configure --prefix=/home/majiahao/ddddd/riscv-binutils-install --target=riscv64 target_alias=riscv64 --no-create --no-recursion
 
 tooldir = ${exec_prefix}/riscv64
 build_tooldir = ${exec_prefix}/riscv64
@@ -313,8 +313,8 @@ PWD_COMMAND = $${PWDCMD-pwd}
 AR_FOR_BUILD = $(AR)
 AS_FOR_BUILD = $(AS)
 CC_FOR_BUILD = $(CC)
-CFLAGS_FOR_BUILD = -g -O0
-CXXFLAGS_FOR_BUILD = -g -O0
+CFLAGS_FOR_BUILD = -g -O2
+CXXFLAGS_FOR_BUILD = -g -O2
 CXX_FOR_BUILD = $(CXX)
 DLLTOOL_FOR_BUILD = $(DLLTOOL)
 GFORTRAN_FOR_BUILD = $(GFORTRAN)
@@ -333,7 +333,7 @@ BUILD_PREFIX_1 = @BUILD_PREFIX_1@
 
 # Flags to pass to stage2 and later makes.  They are defined
 # here so that they can be overridden by Makefile fragments.
-BOOT_CFLAGS= -g -O0
+BOOT_CFLAGS= -g -O2
 BOOT_LDFLAGS=
 BOOT_ADAFLAGS= -gnatpg
 
@@ -379,10 +379,10 @@ WINDMC = windmc
 GNATBIND = no
 GNATMAKE = no
 
-CFLAGS = -g -O0
+CFLAGS = -g -O2
 LDFLAGS = 
 LIBCFLAGS = $(CFLAGS)
-CXXFLAGS = -g -O0
+CXXFLAGS = -g -O2
 LIBCXXFLAGS = $(CXXFLAGS) -fno-implicit-templates
 GOCFLAGS = $(CFLAGS)
 
@@ -501,13 +501,13 @@ COMPILER_AS_FOR_TARGET=$(AS_FOR_TARGET)
 COMPILER_LD_FOR_TARGET=$(LD_FOR_TARGET)
 COMPILER_NM_FOR_TARGET=$(NM_FOR_TARGET)
 
-CFLAGS_FOR_TARGET = -g -O0
-CXXFLAGS_FOR_TARGET = -g -O0
+CFLAGS_FOR_TARGET = -g -O2
+CXXFLAGS_FOR_TARGET = -g -O2
 
 LIBCFLAGS_FOR_TARGET = $(CFLAGS_FOR_TARGET)
 LIBCXXFLAGS_FOR_TARGET = $(CXXFLAGS_FOR_TARGET) -fno-implicit-templates
 LDFLAGS_FOR_TARGET = 
-GOCFLAGS_FOR_TARGET = -O0 -g
+GOCFLAGS_FOR_TARGET = -O2 -g
 
 FLAGS_FOR_TARGET =  -L$$r/$(HOST_SUBDIR)/ld
 SYSROOT_CFLAGS_FOR_TARGET = 

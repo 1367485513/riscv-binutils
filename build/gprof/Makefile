@@ -345,11 +345,11 @@ LIBINTL_DEP =
 LIBOBJS = 
 LIBS = -lm -ldl 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = 
+LIPO = lipo
 LN_S = ln -s
 LTLIBOBJS = 
 MAINT = #
-MAKEINFO = makeinfo --split-size=5000000
+MAKEINFO = makeinfo --split-size=5000000 --split-size=5000000
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = $(top_builddir)/../../gprof/../mkinstalldirs
 MSGFMT = /usr/bin/msgfmt

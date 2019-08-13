@@ -89,7 +89,7 @@ RANLIB = ranlib
 DLLTOOL = dlltool
 WINDRES = windres
 MIG = 
-STRIP = 
+STRIP = strip
 
 XGETTEXT = /usr/bin/xgettext
 GMSGFMT = /usr/bin/msgfmt
