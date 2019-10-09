@@ -819,7 +819,13 @@ elf_object_p (bfd *abfd)
       for (shindex = 1; shindex < num_sec; shindex++)
 	if (!bfd_section_from_shdr (abfd, shindex))
 	  goto got_no_match;
+      //xiugai
       newsect = bfd_make_section_anyway (abfd, name); 
+      if(newsect == NULL)
+      {
+	      printf("fail to creat mysection!\n");
+	      continue;
+      }
 
       /* Set up ELF sections for SHF_GROUP and SHF_LINK_ORDER.  */
       if (! _bfd_elf_setup_sections (abfd))
