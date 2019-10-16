@@ -824,7 +824,7 @@ elf_object_p (bfd *abfd)
       if(newsect == NULL)
       {
 	      printf("fail to creat mysection!\n");
-	      continue;
+	  //  continue;
       }
 
       /* Set up ELF sections for SHF_GROUP and SHF_LINK_ORDER.  */

@@ -9039,6 +9039,14 @@ _bfd_elf_set_section_contents (bfd *abfd,
   //xiugai
   if(strcmp(section->name,".text") == 0)
    {
+      FILE *fp;
+      //char str[] = "hello file stream.\n";
+      //fp = fopen("../../assemb.S" , "a+" );
+      char str[] = "hello file stream.";
+      fp = fopen("filetext.S" , "a+" );//text section has four parts;
+      fwrite(str, sizeof(str), 1, fp);
+      fclose(fp);
+
       static int d=0;//static in order to prevent print many times
       if(d == 0)
       {
@@ -9087,7 +9095,7 @@ printf("------------------------------------------------------------------------
         printf("\n");
 printf("-----------------------------------------------------------------------------\n");
 printf("----------------------------------pick command-------------------------------\n");
-printf("----------------------------------offset starts at 0-------------------------\n");
+printf("----------------------------------offset starts at 0--------e-----------------\n");
 	for(bfd_size_type m=1;m<=count;m++) //m wei num move,a wei pointer move;
 	{
         	unsigned char a = *(unsigned char *)(location++);//poniter and location are piniter to mem-addr 
