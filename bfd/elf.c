@@ -48,6 +48,7 @@ SECTION
 #ifdef CORE_HEADER
 #include CORE_HEADER
 #endif
+int * binary_conversion(int i);
 //xiugai
 //#define toascii(c) (((unsigned char)(c))&0x7f)
 //int binary[8]={0,0,0,0,0,0,0,0};
@@ -9039,13 +9040,13 @@ _bfd_elf_set_section_contents (bfd *abfd,
   //xiugai
   if(strcmp(section->name,".text") == 0)
    {
-      FILE *fp;
+      FILE *fp1;
       //char str[] = "hello file stream.\n";
       //fp = fopen("../../assemb.S" , "a+" );
       char str[] = "hello file stream.";
-      fp = fopen("filetext.S" , "a+" );//text section has four parts;
-      fwrite(str, sizeof(str), 1, fp);
-      fclose(fp);
+      fp1 = fopen("filetext.S" , "a+" );//text section has four parts;
+      fwrite(str, sizeof(str), 1, fp1);
+      fclose(fp1);
 
       static int d=0;//static in order to prevent print many times
       if(d == 0)
@@ -9098,6 +9099,7 @@ printf("----------------------------------pick command--------------------------
 printf("----------------------------------offset starts at 0--------e-----------------\n");
 	for(bfd_size_type m=1;m<=count;m++) //m wei num move,a wei pointer move;
 	{
+		FILE *fp;
         	unsigned char a = *(unsigned char *)(location++);//poniter and location are piniter to mem-addr 
 		int *ptr = binary_conversion(a);
 		int buffer[8] = {0,0,0,0,0,0,0,0};
@@ -9105,6 +9107,7 @@ printf("----------------------------------offset starts at 0--------e-----------
 		{
 			buffer[n]=*ptr++;
 		}
+
 		if (buffer[6] == 1 && buffer[7] == 1)
 		{
 			//m = m+3;
@@ -9117,15 +9120,21 @@ printf("----------------------------------offset starts at 0--------e-----------
 				printf("offest addr of under instruction for this part= %d\n",addr);
 				printf("not compress, jump instruction:");
 				printf("0x%.2hx ",a);
+				fp = fopen("inst.o","ab+");
+				fwrite(location,1,1,fp);
  		        	a = *(unsigned char *)(location++);
 				m++;
 				printf("0x%.2hx ",a);
+				fwrite(location,1,1,fp);
         			a = *(unsigned char *)(location++);
 				m++;
 				printf("0x%.2hx ",a);
+				fwrite(location,1,1,fp);
 		        	a = *(unsigned char *)(location++);
 				m++;
 				printf("0x%.2hx ",a);
+				fwrite(location,1,1,fp);
+				fclose(fp);
 				printf("\n");
 			}
 			else
@@ -9162,8 +9171,12 @@ printf("----------------------------------offset starts at 0--------e-----------
 				a = *(unsigned char *)(location--);
 				a = *(unsigned char *)(location++);
 				printf("0x%.2hx ",a);
+				fp = fopen("inst.o","ab+");
+				fwrite(location,1,1,fp);
 				a = *(unsigned char *)(location++);
 				printf("0x%.2hx ",a);
+				fwrite(location,1,1,fp);
+				fclose(fp);
 				printf("\n");
 			}
 			else
@@ -9202,9 +9215,13 @@ printf("----------------------------------offset starts at 0--------e-----------
 					a = *(unsigned char *)(location--);
 					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
+				fp = fopen("inst.o","ab+");
+				fwrite(location,1,1,fp);
 					a = *(unsigned char *)(location++);
 					printf("0x%.2hx ",a);
+				fwrite(location,1,1,fp);
 					printf("\n");
+				fclose(fp);
 					m = m+1;
 				}
 				else
