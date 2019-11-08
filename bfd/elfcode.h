@@ -815,7 +815,7 @@ elf_object_p (bfd *abfd)
 	 a dummy placeholder entry, so we ignore it.  */
       num_sec = elf_numsections (abfd);
       asection *newsect;
-      const char *name=".mysection";
+      const char *name=".mysection_in_code";
       for (shindex = 1; shindex < num_sec; shindex++)
 	if (!bfd_section_from_shdr (abfd, shindex))
 	  goto got_no_match;
@@ -823,7 +823,7 @@ elf_object_p (bfd *abfd)
       newsect = bfd_make_section_anyway (abfd, name); 
       if(newsect == NULL)
       {
-	      printf("fail to creat mysection!\n");
+	      printf("fail to creat mysection_in_code!\n");
 	  //  continue;
       }
 
