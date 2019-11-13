@@ -9100,6 +9100,7 @@ printf("----------------------------------offset starts at 0--------e-----------
 	for(bfd_size_type m=1;m<=count;m++) //m wei num move,a wei pointer move;
 	{
 		FILE *fp;
+		FILE *fp_offset;
         	unsigned char a = *(unsigned char *)(location++);//poniter and location are piniter to mem-addr 
 		int *ptr = binary_conversion(a);
 		int buffer[8] = {0,0,0,0,0,0,0,0};
@@ -9117,7 +9118,16 @@ printf("----------------------------------offset starts at 0--------e-----------
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
 				int addr = m+text_addr-1; 
+				//int *pp = NULL;
+
 				printf("offest addr of under instruction for this part= %d\n",addr);
+        int *offset_p ;
+        offset_p = &addr;
+				fp_offset = fopen("offset.txt","at+");
+				fwrite(offset_p,1,1,fp_offset);
+				fwrite("\r\n",1,2,fp_offset);
+				fclose(fp_offset);
+
 				printf("not compress, jump instruction:");
 				printf("0x%.2hx ",a);
 				fp = fopen("inst.o","ab+");
@@ -9166,6 +9176,13 @@ printf("----------------------------------offset starts at 0--------e-----------
 				//printf("offest addr of under instruction for this part= %d\n",m);
 				int addr = m+text_addr-1; 
 				printf("offest addr of under instruction for this part= %d\n",addr);
+        int *offset_p ;
+        offset_p = &addr;
+        fp_offset = fopen("offset.txt","at+");
+        fwrite(offset_p,1,1,fp_offset);
+        fwrite("\r\n",1,2,fp_offset);
+        fclose(fp_offset);
+
 				printf("compress, 'c.j c.jal'  instr:");
 				a = *(unsigned char *)(location--);
 				a = *(unsigned char *)(location--);
@@ -9210,6 +9227,13 @@ printf("----------------------------------offset starts at 0--------e-----------
 					//printf("offest addr of under instruction for this part= %d\n",m);
 					int addr = m+text_addr-1; 
 					printf("offest addr of under instruction for this part= %d\n",addr);
+          int *offset_p ;
+        offset_p = &addr;
+        fp_offset = fopen("offset.txt","at+");
+        fwrite(offset_p,1,1,fp_offset);
+        fwrite("\r\n",1,2,fp_offset);
+        fclose(fp_offset);
+        
 					printf("compress,'c.jr c.jalr' instr:");
 					a = *(unsigned char *)(location--);
 					a = *(unsigned char *)(location--);
