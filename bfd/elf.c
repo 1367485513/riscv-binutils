@@ -9114,7 +9114,7 @@ printf("----------------------------------offset starts at 0--------e-----------
 			//m = m+3;
 			//judge jump instruction
 			if ((buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1) ||
-			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
+			     (buffer[1]==1 && buffer[2]==1 && buffer[3]==0 && buffer[4]==0 && buffer[5]==1))
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
 				//int addr __attribute__((section(".mydata")))= m+text_addr-1; 
