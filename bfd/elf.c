@@ -9011,7 +9011,7 @@ _bfd_elf_set_section_contents (bfd *abfd,
 //xiugai
   const void *pointer;
   pointer = location;
-  static int text_addr = 0;
+  static long text_addr = 0;
 
   if (! abfd->output_has_begun
       && ! _bfd_elf_compute_section_file_positions (abfd, NULL))
@@ -9118,15 +9118,15 @@ printf("----------------------------------offset starts at 0--------e-----------
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
 				//int addr __attribute__((section(".mydata")))= m+text_addr-1; 
-				int addr = m+text_addr-1; 
+				long  addr = m+text_addr-1; 
 				//int *pp = NULL;
 
-				printf("offest addr of under instruction for this part= %d\n",addr);
+				printf("offest addr of under instruction for this part= %ld\n",addr);
 				
-			        int *offset_p ;
+			        long *offset_p ;
        				offset_p = &addr;
 				fp_offset = fopen("offset.txt","at+");
-				fwrite(offset_p,1,1,fp_offset);
+				fwrite(offset_p,sizeof(addr),1,fp_offset);
 				fwrite("\r\n",1,2,fp_offset);
 				fclose(fp_offset);
 
@@ -9176,14 +9176,14 @@ printf("----------------------------------offset starts at 0--------e-----------
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
-				int addr = m+text_addr-1; 
-				printf("offest addr of under instruction for this part= %d\n",addr);
-        int *offset_p ;
-        offset_p = &addr;
-        fp_offset = fopen("offset.txt","at+");
-        fwrite(offset_p,1,1,fp_offset);
-        fwrite("\r\n",1,2,fp_offset);
-        fclose(fp_offset);
+				long addr = m+text_addr-1; 
+				printf("offest addr of under instruction for this part= %ld\n",addr);
+       				long *offset_p ;
+			        offset_p = &addr;
+			        fp_offset = fopen("offset.txt","at+");
+			        fwrite(offset_p,sizeof(addr),1,fp_offset);
+			        fwrite("\r\n",1,2,fp_offset);
+			        fclose(fp_offset);
 
 				printf("compress, 'c.j c.jal'  instr:");
 				a = *(unsigned char *)(location--);
@@ -9227,14 +9227,14 @@ printf("----------------------------------offset starts at 0--------e-----------
 				{
 					//printf("10--- yasuo, c.jr c.jalr :");
 					//printf("offest addr of under instruction for this part= %d\n",m);
-					int addr = m+text_addr-1; 
-					printf("offest addr of under instruction for this part= %d\n",addr);
-          int *offset_p ;
-        offset_p = &addr;
-        fp_offset = fopen("offset.txt","at+");
-        fwrite(offset_p,1,1,fp_offset);
-        fwrite("\r\n",1,2,fp_offset);
-        fclose(fp_offset);
+					long addr = m+text_addr-1; 
+					printf("offest addr of under instruction for this part= %ld\n",addr);
+				        long *offset_p ;
+				        offset_p = &addr;
+				        fp_offset = fopen("offset.txt","at+");
+				        fwrite(offset_p,sizeof(addr),1,fp_offset);
+				        fwrite("\r\n",1,2,fp_offset);
+				        fclose(fp_offset);
         
 					printf("compress,'c.jr c.jalr' instr:");
 					a = *(unsigned char *)(location--);
