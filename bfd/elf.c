@@ -9117,12 +9117,14 @@ printf("----------------------------------offset starts at 0--------e-----------
 			     (buffer[1]==1 && buffer[2]==0 && buffer[3]==0 && buffer[4]==1 && buffer[5]==1))
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
+				//int addr __attribute__((section(".mydata")))= m+text_addr-1; 
 				int addr = m+text_addr-1; 
 				//int *pp = NULL;
 
 				printf("offest addr of under instruction for this part= %d\n",addr);
-        int *offset_p ;
-        offset_p = &addr;
+				
+			        int *offset_p ;
+       				offset_p = &addr;
 				fp_offset = fopen("offset.txt","at+");
 				fwrite(offset_p,1,1,fp_offset);
 				fwrite("\r\n",1,2,fp_offset);
