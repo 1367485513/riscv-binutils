@@ -9118,7 +9118,8 @@ printf("----------------------------------offset starts at 0--------e-----------
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
 				//int addr __attribute__((section(".mydata")))= m+text_addr-1; 
-				long  addr = m+text_addr-1; 
+				long  addr = m+text_addr-1,inst_type=1;
+				long  *type_p = &inst_type;
 				//int *pp = NULL;
 
 				printf("offest addr of under instruction for this part= %ld\n",addr);
@@ -9127,7 +9128,7 @@ printf("----------------------------------offset starts at 0--------e-----------
        				offset_p = &addr;
 				fp_offset = fopen("offset.txt","at+");
 				fwrite(offset_p,sizeof(addr),1,fp_offset);
-				fwrite("\r\n",1,2,fp_offset);
+				fwrite(type_p,sizeof(inst_type),1,fp_offset);
 				fclose(fp_offset);
 
 				printf("not compress, jump instruction:");
@@ -9176,13 +9177,14 @@ printf("----------------------------------offset starts at 0--------e-----------
                		   (buffer2[0]==0 && buffer2[1]==0 && buffer2[2]==1 ))
 			{
 				//printf("offest addr of under instruction for this part= %d\n",m);
-				long addr = m+text_addr-1; 
+				long addr = m+text_addr-1,inst_type=2; 
+				long *type_p = &inst_type;
 				printf("offest addr of under instruction for this part= %ld\n",addr);
        				long *offset_p ;
 			        offset_p = &addr;
 			        fp_offset = fopen("offset.txt","at+");
 			        fwrite(offset_p,sizeof(addr),1,fp_offset);
-			        fwrite("\r\n",1,2,fp_offset);
+			        fwrite(type_p,sizeof(inst_type),1,fp_offset);
 			        fclose(fp_offset);
 
 				printf("compress, 'c.j c.jal'  instr:");
@@ -9227,13 +9229,14 @@ printf("----------------------------------offset starts at 0--------e-----------
 				{
 					//printf("10--- yasuo, c.jr c.jalr :");
 					//printf("offest addr of under instruction for this part= %d\n",m);
-					long addr = m+text_addr-1; 
+					long addr = m+text_addr-1,inst_type=3; 
+					long *type_p = &inst_type;
 					printf("offest addr of under instruction for this part= %ld\n",addr);
 				        long *offset_p ;
 				        offset_p = &addr;
 				        fp_offset = fopen("offset.txt","at+");
 				        fwrite(offset_p,sizeof(addr),1,fp_offset);
-				        fwrite("\r\n",1,2,fp_offset);
+				        fwrite(type_p,sizeof(inst_type),1,fp_offset);
 				        fclose(fp_offset);
         
 					printf("compress,'c.jr c.jalr' instr:");
